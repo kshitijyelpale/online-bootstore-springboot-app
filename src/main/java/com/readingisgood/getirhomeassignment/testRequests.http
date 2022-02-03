@@ -1,0 +1,26 @@
+POST localhost:8080/authenticate
+Content-Type: application/json
+
+{
+  "username": "test",
+  "password": "test"
+}
+
+
+###
+GET localhost:8080/books/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQzODgyODM5LCJpYXQiOjE2NDM4NDY4Mzl9.TKHQ61vYm8waxPfnpQgHF7nqm8JFBjvlWwZPWV9pglE
+
+###
+GET localhost:8080/customers/1
+Authorization: Basic user b777149c-3f58-46b1-949c-b77d1a1ba327
+
+###
+POST localhost:8080/customers
+Authorization: Basic user f7747767-5870-49c2-8926-bf8cdc9b76eb
+Content-Type: application/json
+
+{
+  "name": "amit",
+  "contactNumber": "6576556"
+}
