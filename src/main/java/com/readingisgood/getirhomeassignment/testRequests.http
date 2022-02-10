@@ -9,18 +9,51 @@ Content-Type: application/json
 
 ###
 GET localhost:8080/books/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQzODgyODM5LCJpYXQiOjE2NDM4NDY4Mzl9.TKHQ61vYm8waxPfnpQgHF7nqm8JFBjvlWwZPWV9pglE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+
 
 ###
-GET localhost:8080/customers/1
-Authorization: Basic user b777149c-3f58-46b1-949c-b77d1a1ba327
+POST localhost:8080/books
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+Content-Type: application/json
+
+{
+  "name": "cew",
+  "publisher": "cre3wfr",
+  "stock": 34
+}
+
+###
+GET localhost:8080/customers/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
 
 ###
 POST localhost:8080/customers
-Authorization: Basic user f7747767-5870-49c2-8926-bf8cdc9b76eb
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
 Content-Type: application/json
 
 {
   "name": "amit",
   "contactNumber": "6576556"
+}
+
+###
+GET localhost:8080/customers/1/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+
+###
+GET localhost:8080/orders/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+
+###
+POST localhost:8080/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+Content-Type: application/json
+
+{
+  "customer_id": 2,
+  "book_ids": [
+    1
+  ],
+  "amount": 13.34
 }

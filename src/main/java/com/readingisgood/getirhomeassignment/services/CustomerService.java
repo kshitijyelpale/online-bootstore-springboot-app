@@ -21,6 +21,13 @@ public class CustomerService {
 
     public Customer findCustomerById(Long customerId) {
         Optional<Customer> customer = customerRepository.findById(customerId);
+
+        return customer.orElse(null);
+    }
+
+    public Customer findOrdersForCustomerId(Long customerId) {
+        Optional<Customer> customer = customerRepository.findById(customerId);
+
         return customer.orElse(null);
     }
 }

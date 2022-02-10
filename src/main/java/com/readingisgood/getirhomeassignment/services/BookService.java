@@ -3,8 +3,6 @@ package com.readingisgood.getirhomeassignment.services;
 import com.readingisgood.getirhomeassignment.enities.Book;
 import com.readingisgood.getirhomeassignment.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,7 +24,7 @@ public class BookService {
         Optional<Book> book = bookRepository.findById(bookId);
         if (book.isPresent()) {
             Book book1 = book.get();
-            book1.setQuantity(value);
+            book1.setStock(value);
 
             return bookRepository.save(book1);
         }
@@ -36,6 +34,7 @@ public class BookService {
 
     public Book findBookById(Long bookId) {
         Optional<Book> book = bookRepository.findById(bookId);
+
         return book.orElse(null);
     }
 }
