@@ -30,7 +30,7 @@ public class CustomerController {
         resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)
                 .findCustomerById(savedCustomer.getId())).withSelfRel());
 
-        return new ResponseEntity<>(resource, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(resource, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -40,16 +40,15 @@ public class CustomerController {
         resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)
                 .findCustomerById(customer.getId())).withSelfRel());
 
-        return new ResponseEntity<>(resource, HttpStatus.OK);
+        return ResponseEntity.ok(resource);
     }
 
     @GetMapping("/{id}/orders")
     public ResponseEntity<?> findOrderByCustomerId(@PathVariable("id") Long customerId) {
-        Customer customer = customerService.findCustomerById(customerId);
-        CollectionModel<Order> resource = CollectionModel.of(customer.getOrders());
+        CollectionModel<Order> resource = CollectionModel.of(customerService.findOrdersForCustomerId(customerId));
         resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)
-                .findCustomerById(customer.getId())).withSelfRel());
+                .findCustomerById(customerId)).withSelfRel());
 
-        return new ResponseEntity<>(resource, HttpStatus.OK);
+        return ResponseEntity.ok(resource);
     }
 }

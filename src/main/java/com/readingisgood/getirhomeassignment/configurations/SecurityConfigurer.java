@@ -23,7 +23,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     private JwtRequestFilter jwtRequestFilter;
 
     private static final String[] AUTH_WHITELIST = {
-        "/h2-console/**", "/authenticate"
+        "/h2-console/**", "/authenticate", "/book-docs/**", "/swagger-ui/**"
     };
 
     @Override

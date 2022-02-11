@@ -1,11 +1,13 @@
 package com.readingisgood.getirhomeassignment.services;
 
 import com.readingisgood.getirhomeassignment.enities.Book;
+import com.readingisgood.getirhomeassignment.exception.CustomException;
 import com.readingisgood.getirhomeassignment.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -28,13 +30,12 @@ public class BookService {
 
             return bookRepository.save(book1);
         }
-
-        return null;
+        throw new CustomException(String.format("Book id %s does not exist", bookId));
     }
 
     public Book findBookById(Long bookId) {
         Optional<Book> book = bookRepository.findById(bookId);
 
-        return book.orElse(null);
+        return book.orElseThrow(NoSuchElementException::new);
     }
 }

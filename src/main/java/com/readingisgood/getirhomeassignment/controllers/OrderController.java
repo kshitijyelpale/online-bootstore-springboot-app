@@ -8,16 +8,17 @@ import com.readingisgood.getirhomeassignment.services.BookService;
 import com.readingisgood.getirhomeassignment.services.CustomerService;
 import com.readingisgood.getirhomeassignment.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.*;
 
 @RestController
 @RequestMapping("/orders")
@@ -26,42 +27,15 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private CustomerService customerService;
-
-    @Autowired
-    private BookService bookService;
-
     @PostMapping
     public ResponseEntity<?> saveOrder(@RequestBody OrderRequest orderRequest) {
+        Order order = orderService.saveOrder(orderRequest);
 
-        Long customerId = orderRequest.getCustomer_id();
-
-        Customer customer = customerService.findCustomerById(customerId);
-        if (customer == null) return ResponseEntity.noContent().build();
-
-        Set<Long> bookIds = orderRequest.getBook_ids();
-        Set<Book> books = new HashSet<>();
-        bookIds.forEach(bookId -> {
-            Book book = bookService.findBookById(bookId);
-            if (book != null) {
-                books.add(book);
-            }
-        });
-        if (books.isEmpty()) return ResponseEntity.noContent().build();
-
-        Order order = new Order();
-
-        order.setCustomer(customer);
-        order.setAmount(orderRequest.getAmount());
-        order.setBooks(books);
-
-        Order savedOrder = orderService.saveOrder(order);
-        EntityModel<Order> resource = EntityModel.of(savedOrder);
+        EntityModel<Order> resource = EntityModel.of(order);
         resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class)
-                .findOrderById(savedOrder.getId())).withSelfRel());
+                .findOrderById(order.getId())).withSelfRel());
 
-        return new ResponseEntity<>(resource, HttpStatus.OK);
+        return ResponseEntity.ok(resource);
     }
 
     @GetMapping("/{id}")
@@ -71,11 +45,16 @@ public class OrderController {
         resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class)
                 .findOrderById(order.getId())).withSelfRel());
 
-        return new ResponseEntity<>(resource, HttpStatus.OK);
+        return ResponseEntity.ok(resource);
     }
 
-    @GetMapping("/interval?start")
-    public ResponseEntity<?> findOrderBetweenDates() {
-        return ResponseEntity.noContent().build();
+    @GetMapping("/interval")
+    public ResponseEntity<?> findOrderBetweenDates(
+            @RequestParam("fromDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fromDate,
+            @RequestParam("toDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date toDate
+    ) {
+        CollectionModel<Order> resource = CollectionModel.of(orderService.findOrdersBetweenDates(fromDate, toDate));
+
+        return ResponseEntity.ok(resource);
     }
 }

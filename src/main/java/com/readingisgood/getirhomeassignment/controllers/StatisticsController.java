@@ -1,7 +1,10 @@
 package com.readingisgood.getirhomeassignment.controllers;
 
+import com.readingisgood.getirhomeassignment.enities.Statistics;
 import com.readingisgood.getirhomeassignment.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +20,13 @@ public class StatisticsController {
 
     @GetMapping("/customers")
     public ResponseEntity<?> getStatsForAllCustomers() {
-        return ResponseEntity.noContent().build();
+        CollectionModel<Statistics> resource = CollectionModel.of(orderService.findAllMonthlyStatsForAllCustomers());
+        return ResponseEntity.ok(resource);
     }
 
     @GetMapping("/customers/{id}")
     public ResponseEntity<?> getStatsForCustomerId(@PathVariable("id") Long customerId) {
-        return ResponseEntity.noContent().build();
+        CollectionModel<Statistics> resource = CollectionModel.of(orderService.findMonthlyStatsByCustomerId(customerId));
+        return ResponseEntity.ok(resource);
     }
 }

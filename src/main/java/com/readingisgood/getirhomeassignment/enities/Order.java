@@ -14,6 +14,40 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@SqlResultSetMapping(
+        name = "Statistics",
+        classes = {
+                @ConstructorResult(
+                        targetClass = Statistics.class,
+                        columns = {
+                                @ColumnResult(name="CUSTOMER_ID", type = Long.class),
+                                @ColumnResult(name="MONTH_NAME", type = String.class),
+                                @ColumnResult(name="TOTAL_ORDER_COUNT", type = Integer.class),
+                                @ColumnResult(name="TOTAL_BOOK_COUNT", type = Integer.class),
+                                @ColumnResult(name="TOTAL_PURCHASED_AMOUNT", type = Double.class)
+                        }
+                )
+        }
+)
+@NamedNativeQuery(
+        name = "Order.getMonthlyStats",
+        query =
+                "SELECT CUSTOMER_ID, MONTHNAME(ORDER_DATE) as MONTH_NAME, COUNT(ID) as TOTAL_ORDER_COUNT, " +
+                        "COUNT(bo.BOOK_ID) as TOTAL_BOOK_COUNT, SUM(AMOUNT) as TOTAL_PURCHASED_AMOUNT " +
+                "FROM ORDERS o JOIN BOOKS_ORDERED bo on o.ID=bo.ORDER_ID " +
+                "GROUP BY CUSTOMER_ID, MONTH(ORDER_DATE)",
+        resultSetMapping = "Statistics"
+)
+@NamedNativeQuery(
+        name = "Order.getMonthlyStatsForCustomerId",
+        query =
+                "SELECT CUSTOMER_ID, MONTHNAME(ORDER_DATE) as MONTH_NAME, COUNT(ID) as TOTAL_ORDER_COUNT, " +
+                        "COUNT(bo.BOOK_ID) as TOTAL_BOOK_COUNT, SUM(AMOUNT) as TOTAL_PURCHASED_AMOUNT " +
+                "FROM ORDERS o JOIN BOOKS_ORDERED bo on o.ID=bo.ORDER_ID " +
+                "WHERE CUSTOMER_ID=:customerId " +
+                "GROUP BY MONTH(ORDER_DATE)",
+        resultSetMapping = "Statistics"
+)
 @Entity
 @Table(name = "orders")
 @Data

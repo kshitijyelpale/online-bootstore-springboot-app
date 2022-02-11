@@ -9,12 +9,12 @@ Content-Type: application/json
 
 ###
 GET localhost:8080/books/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
 
 
 ###
 POST localhost:8080/books
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
 Content-Type: application/json
 
 {
@@ -25,29 +25,30 @@ Content-Type: application/json
 
 ###
 GET localhost:8080/customers/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
 
 ###
 POST localhost:8080/customers
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
 Content-Type: application/json
 
 {
   "name": "amit",
-  "contactNumber": "6576556"
+  "contactNumber": "6576556",
+  "email": "abc@gmail.com"
 }
 
 ###
-GET localhost:8080/customers/1/orders
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+GET localhost:8080/customers/2/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
 
 ###
 GET localhost:8080/orders/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
 
 ###
 POST localhost:8080/orders
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NTIxMzcyLCJpYXQiOjE2NDQ0ODUzNzJ9.3NLDFxXEiJleWTI9PwpzAtx1u0wj6Txpx-DgRw3LElU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
 Content-Type: application/json
 
 {
@@ -57,3 +58,15 @@ Content-Type: application/json
   ],
   "amount": 13.34
 }
+
+###
+GET localhost:8080/orders/interval?fromDate=2022-01-31&toDate=2022-03-01
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+
+###
+GET localhost:8080/stats/customers
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+
+###
+GET localhost:8080/stats/customers/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY

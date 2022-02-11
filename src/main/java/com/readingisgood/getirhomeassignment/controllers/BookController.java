@@ -24,7 +24,7 @@ public class BookController {
         resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(BookController.class)
                 .findBookById(savedBook.getId())).withSelfRel());
 
-        return new ResponseEntity<>(resource, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(resource, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}/quantity/{value}")
@@ -34,7 +34,7 @@ public class BookController {
         resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(BookController.class)
                 .findBookById(book.getId())).withSelfRel());
 
-        return new ResponseEntity<>(resource, HttpStatus.OK);
+        return ResponseEntity.ok(resource);
     }
 
     @GetMapping("/{id}")
@@ -44,6 +44,6 @@ public class BookController {
         resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(BookController.class)
                 .findBookById(book.getId())).withSelfRel());
 
-        return new ResponseEntity<>(resource, HttpStatus.OK);
+        return ResponseEntity.ok(resource);
     }
 }
