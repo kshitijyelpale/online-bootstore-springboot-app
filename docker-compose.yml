@@ -1,0 +1,13 @@
+version: "2"
+
+networks:
+  book-net:
+    driver: bridge
+
+services:
+  book:
+    build: .
+    ports:
+      - 8080:8080
+    networks:
+      - book-net
