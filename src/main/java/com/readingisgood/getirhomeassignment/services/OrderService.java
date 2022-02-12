@@ -2,13 +2,12 @@ package com.readingisgood.getirhomeassignment.services;
 
 import com.readingisgood.getirhomeassignment.enities.*;
 import com.readingisgood.getirhomeassignment.exception.CustomException;
+import com.readingisgood.getirhomeassignment.repositories.BooksOrderedRepository;
 import com.readingisgood.getirhomeassignment.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.Timestamp;
 import java.util.*;
 
 @Service
@@ -18,10 +17,14 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
+    private BooksOrderedRepository booksOrderedRepository;
+
+    @Autowired
     private CustomerService customerService;
 
     @Autowired
     private BookService bookService;
+    private Object BooksOrders;
 
     @Transactional
     public Order saveOrder(OrderRequest orderRequest) {
@@ -32,16 +35,24 @@ public class OrderService {
             throw new CustomException("Customer does not exist.");
         }
 
-        Set<Long> bookIds = orderRequest.getBook_ids();
+        List<BooksQuantity> booksWithQuantity = orderRequest.getBooks_quantity();
 
-        if (bookIds.isEmpty()) throw new CustomException("No books are in order request.");
+        if (booksWithQuantity.isEmpty()) throw new CustomException("No books are in order request.");
 
+        Map<Long, Integer> booksQuant = new HashMap<>();
         Set<Book> books = new HashSet<>();
-        bookIds.forEach(bookId -> {
-            Book book = bookService.findBookById(bookId);
+        booksWithQuantity.forEach(booksQuantity -> {
+            Book book = bookService.findBookById(booksQuantity.getBookId());
             if (book.getStock() == 0) {
                 throw new CustomException(String.format("Book %s is out of stock.", book.getName()));
             }
+
+            if (book.getStock() - booksQuantity.getQuantity() < 0) {
+                throw new CustomException(String.format("Book %s is not available in requested quantity.", book.getName()));
+            }
+
+            bookService.updateQuantityForBook(book.getId(), book.getStock() - booksQuantity.getQuantity());
+            booksQuant.put(book.getId(), booksQuantity.getQuantity());
             books.add(book);
         });
         if (books.isEmpty()) {
@@ -54,7 +65,18 @@ public class OrderService {
         order.setAmount(orderRequest.getAmount());
         order.setBooks(books);
 
-        return orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
+
+        books.forEach(book -> {
+                var booksOrders = booksOrderedRepository.findByOrderIdAndBookId(savedOrder.getId(), book.getId());
+                if (booksOrders.isPresent()) {
+                    booksOrders.get().setQuantity(booksQuant.get(book.getId()));
+                    booksOrderedRepository.save(booksOrders.get());
+                }
+            }
+        );
+
+        return savedOrder;
     }
 
     public Order findOrderById(Long orderId) {

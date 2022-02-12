@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,28 +28,31 @@ public class CustomerController {
         log.info("Customer " + customer.getId() + " passed");
         Customer savedCustomer = customerService.saveCustomer(customer);
         EntityModel<Customer> resource = EntityModel.of(savedCustomer);
-        resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)
-                .findCustomerById(savedCustomer.getId())).withSelfRel());
 
-        return new ResponseEntity<>(resource, HttpStatus.CREATED);
+        return buildResponseEntity(savedCustomer.getId(), resource, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findCustomerById(@PathVariable("id") Long customerId) {
         Customer customer = customerService.findCustomerById(customerId);
         EntityModel<Customer> resource = EntityModel.of(customer);
-        resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)
-                .findCustomerById(customer.getId())).withSelfRel());
 
-        return ResponseEntity.ok(resource);
+        return buildResponseEntity(customer.getId(), resource, HttpStatus.OK);
     }
 
     @GetMapping("/{id}/orders")
     public ResponseEntity<?> findOrderByCustomerId(@PathVariable("id") Long customerId) {
         CollectionModel<Order> resource = CollectionModel.of(customerService.findOrdersForCustomerId(customerId));
-        resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)
-                .findCustomerById(customerId)).withSelfRel());
 
-        return ResponseEntity.ok(resource);
+        return buildResponseEntity(customerId, resource, HttpStatus.OK);
+    }
+
+    private ResponseEntity<?> buildResponseEntity(Long customerId, RepresentationModel representationModel, HttpStatus httpStatus) {
+        representationModel.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)
+                .findCustomerById(customerId)).withSelfRel());
+        representationModel.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)
+                .findOrderByCustomerId(customerId)).withRel("orders"));
+
+        return new ResponseEntity<>(representationModel, httpStatus);
     }
 }

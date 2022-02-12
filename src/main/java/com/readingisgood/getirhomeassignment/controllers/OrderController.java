@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,22 +31,17 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<?> saveOrder(@RequestBody OrderRequest orderRequest) {
         Order order = orderService.saveOrder(orderRequest);
-
         EntityModel<Order> resource = EntityModel.of(order);
-        resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class)
-                .findOrderById(order.getId())).withSelfRel());
 
-        return ResponseEntity.ok(resource);
+        return buildResponseEntity(order.getId(), resource, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findOrderById(@PathVariable("id") Long orderId) {
         Order order = orderService.findOrderById(orderId);
         EntityModel<Order> resource = EntityModel.of(order);
-        resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class)
-                .findOrderById(order.getId())).withSelfRel());
 
-        return ResponseEntity.ok(resource);
+        return buildResponseEntity(order.getId(), resource, HttpStatus.OK);
     }
 
     @GetMapping("/interval")
@@ -54,7 +50,16 @@ public class OrderController {
             @RequestParam("toDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date toDate
     ) {
         CollectionModel<Order> resource = CollectionModel.of(orderService.findOrdersBetweenDates(fromDate, toDate));
+        resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class)
+                .findOrderBetweenDates(fromDate, toDate)).withRel("interval"));
 
-        return ResponseEntity.ok(resource);
+        return buildResponseEntity(0L, resource, HttpStatus.OK);
+    }
+
+    private ResponseEntity<?> buildResponseEntity(Long orderId, RepresentationModel representationModel, HttpStatus httpStatus) {
+        representationModel.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(OrderController.class)
+                .findOrderById(orderId)).withSelfRel());
+
+        return new ResponseEntity<>(representationModel, httpStatus);
     }
 }

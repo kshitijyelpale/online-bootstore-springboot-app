@@ -23,6 +23,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     public Set<Statistics> getMonthlyStatsForCustomerId(@Param("customerId") Long customerId);
 
 
-    //@Query("SELECT o FROM #{#entityName} o WHERE o.orderDate BETWEEN :fromDate AND :toDate")
     public Set<Order> findOrdersByOrderDateBetween(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 }

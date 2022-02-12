@@ -14,13 +14,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3M
 
 ###
 POST localhost:8080/books
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjYzMjQxLCJpYXQiOjE2NDQ2MjcyNDF9.UT4_71p8eWLv5IgGAIlUwa3eCjvWkQCLBCvCKOK2KD4
 Content-Type: application/json
 
 {
-  "name": "cew",
+  "name": "nhn",
   "publisher": "cre3wfr",
-  "stock": 34
+  "stock": 5
 }
 
 ###
@@ -29,11 +29,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3M
 
 ###
 POST localhost:8080/customers
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjYzMjQxLCJpYXQiOjE2NDQ2MjcyNDF9.UT4_71p8eWLv5IgGAIlUwa3eCjvWkQCLBCvCKOK2KD4
 Content-Type: application/json
 
 {
-  "name": "amit",
+  "name": "amitd",
   "contactNumber": "6576556",
   "email": "abc@gmail.com"
 }
@@ -43,18 +43,18 @@ GET localhost:8080/customers/2/orders
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
 
 ###
-GET localhost:8080/orders/3
+GET localhost:8080/orders/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
 
 ###
 POST localhost:8080/orders
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjYzMjQxLCJpYXQiOjE2NDQ2MjcyNDF9.UT4_71p8eWLv5IgGAIlUwa3eCjvWkQCLBCvCKOK2KD4
 Content-Type: application/json
 
 {
   "customer_id": 2,
-  "book_ids": [
-    1
+  "books_quantity": [
+    {"bookId" : 1, "quantity": 3}
   ],
   "amount": 13.34
 }
@@ -65,7 +65,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3M
 
 ###
 GET localhost:8080/stats/customers
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjYzMjQxLCJpYXQiOjE2NDQ2MjcyNDF9.UT4_71p8eWLv5IgGAIlUwa3eCjvWkQCLBCvCKOK2KD4
 
 ###
 GET localhost:8080/stats/customers/2

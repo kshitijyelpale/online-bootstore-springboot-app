@@ -2,6 +2,7 @@ package com.readingisgood.getirhomeassignment.enities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,7 +34,7 @@ import java.util.Set;
         name = "Order.getMonthlyStats",
         query =
                 "SELECT CUSTOMER_ID, MONTHNAME(ORDER_DATE) as MONTH_NAME, COUNT(ID) as TOTAL_ORDER_COUNT, " +
-                        "COUNT(bo.BOOK_ID) as TOTAL_BOOK_COUNT, SUM(AMOUNT) as TOTAL_PURCHASED_AMOUNT " +
+                        "SUM(bo.QUANTITY) as TOTAL_BOOK_COUNT, SUM(AMOUNT) as TOTAL_PURCHASED_AMOUNT " +
                 "FROM ORDERS o JOIN BOOKS_ORDERED bo on o.ID=bo.ORDER_ID " +
                 "GROUP BY CUSTOMER_ID, MONTH(ORDER_DATE)",
         resultSetMapping = "Statistics"
@@ -42,7 +43,7 @@ import java.util.Set;
         name = "Order.getMonthlyStatsForCustomerId",
         query =
                 "SELECT CUSTOMER_ID, MONTHNAME(ORDER_DATE) as MONTH_NAME, COUNT(ID) as TOTAL_ORDER_COUNT, " +
-                        "COUNT(bo.BOOK_ID) as TOTAL_BOOK_COUNT, SUM(AMOUNT) as TOTAL_PURCHASED_AMOUNT " +
+                        "SUM(bo.QUANTITY) as TOTAL_BOOK_COUNT, SUM(AMOUNT) as TOTAL_PURCHASED_AMOUNT " +
                 "FROM ORDERS o JOIN BOOKS_ORDERED bo on o.ID=bo.ORDER_ID " +
                 "WHERE CUSTOMER_ID=:customerId " +
                 "GROUP BY MONTH(ORDER_DATE)",
@@ -59,14 +60,14 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id = 0L;
     private Timestamp orderDate = new Timestamp(System.currentTimeMillis());
-    private Integer quantityOrdered;
     private Double amount;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-   //@JsonBackReference
+    @JsonIgnore
     private Customer customer;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "books_ordered",
