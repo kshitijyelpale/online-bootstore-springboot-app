@@ -1,12 +1,7 @@
 package com.readingisgood.getirhomeassignment.enities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.*;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -33,41 +28,52 @@ import java.util.Set;
 @NamedNativeQuery(
         name = "Order.getMonthlyStats",
         query =
-                "SELECT CUSTOMER_ID, MONTHNAME(ORDER_DATE) as MONTH_NAME, COUNT(ID) as TOTAL_ORDER_COUNT, " +
-                        "SUM(bo.QUANTITY) as TOTAL_BOOK_COUNT, SUM(AMOUNT) as TOTAL_PURCHASED_AMOUNT " +
-                "FROM ORDERS o JOIN BOOKS_ORDERED bo on o.ID=bo.ORDER_ID " +
-                "GROUP BY CUSTOMER_ID, MONTH(ORDER_DATE)",
+                "SELECT CUSTOMER_ID, MONTHNAME(ORDER_DATE) as MONTH_NAME, COUNT(DISTINCT(ID)) as TOTAL_ORDER_COUNT, " +
+                        "SUM(d.QUANTITY) as TOTAL_BOOK_COUNT, SUM(AMOUNT) as TOTAL_PURCHASED_AMOUNT " +
+                "FROM ORDERS o INNER JOIN ( " +
+                        "SELECT ORDER_ID, SUM(QUANTITY) as QUANTITY " +
+                        "FROM BOOKS_ORDERED " +
+                        "GROUP BY ORDER_ID " +
+                    ") d on o.ID=d.ORDER_ID " +
+                "GROUP BY CUSTOMER_ID, MONTHNAME(ORDER_DATE)",
         resultSetMapping = "Statistics"
 )
 @NamedNativeQuery(
         name = "Order.getMonthlyStatsForCustomerId",
         query =
-                "SELECT CUSTOMER_ID, MONTHNAME(ORDER_DATE) as MONTH_NAME, COUNT(ID) as TOTAL_ORDER_COUNT, " +
-                        "SUM(bo.QUANTITY) as TOTAL_BOOK_COUNT, SUM(AMOUNT) as TOTAL_PURCHASED_AMOUNT " +
-                "FROM ORDERS o JOIN BOOKS_ORDERED bo on o.ID=bo.ORDER_ID " +
+                "SELECT CUSTOMER_ID, MONTHNAME(ORDER_DATE) as MONTH_NAME, COUNT(DISTINCT(ID)) as TOTAL_ORDER_COUNT, " +
+                        "SUM(d.QUANTITY) as TOTAL_BOOK_COUNT, SUM(AMOUNT) as TOTAL_PURCHASED_AMOUNT " +
+                "FROM ORDERS o INNER JOIN (" +
+                        "SELECT ORDER_ID, SUM(QUANTITY) as QUANTITY " +
+                        "FROM BOOKS_ORDERED " +
+                        "GROUP BY ORDER_ID" +
+                    ") d on o.ID=d.ORDER_ID " +
                 "WHERE CUSTOMER_ID=:customerId " +
-                "GROUP BY MONTH(ORDER_DATE)",
+                "GROUP BY MONTHNAME(ORDER_DATE)",
         resultSetMapping = "Statistics"
 )
 @Entity
 @Table(name = "orders")
-@Data
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     private Long id = 0L;
+
+    @Getter
     private Timestamp orderDate = new Timestamp(System.currentTimeMillis());
+
+    @Getter
     private Double amount;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-    @JsonIgnore
     private Customer customer;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "books_ordered",
@@ -75,6 +81,16 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
     private Set<Book> books = new HashSet<Book>();
+
+    @JsonManagedReference
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    @JsonManagedReference
+    public Set<Book> getBooks() {
+        return books;
+    }
 
     public void addBooks(Book book) {
         this.books.add(book);

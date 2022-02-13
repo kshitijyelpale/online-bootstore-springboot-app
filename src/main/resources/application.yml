@@ -12,6 +12,9 @@ spring:
       enabled: true
       settings:
         web-allow-others: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 
 springdoc:
   api-docs:

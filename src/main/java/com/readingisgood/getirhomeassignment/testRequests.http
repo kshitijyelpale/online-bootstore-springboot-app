@@ -9,12 +9,12 @@ Content-Type: application/json
 
 ###
 GET localhost:8080/books/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg
 
 
 ###
 POST localhost:8080/books
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjYzMjQxLCJpYXQiOjE2NDQ2MjcyNDF9.UT4_71p8eWLv5IgGAIlUwa3eCjvWkQCLBCvCKOK2KD4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg
 Content-Type: application/json
 
 {
@@ -25,11 +25,11 @@ Content-Type: application/json
 
 ###
 GET localhost:8080/customers/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg
 
 ###
 POST localhost:8080/customers
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjYzMjQxLCJpYXQiOjE2NDQ2MjcyNDF9.UT4_71p8eWLv5IgGAIlUwa3eCjvWkQCLBCvCKOK2KD4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg
 Content-Type: application/json
 
 {
@@ -40,33 +40,33 @@ Content-Type: application/json
 
 ###
 GET localhost:8080/customers/2/orders
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg
 
 ###
-GET localhost:8080/orders/4
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+GET localhost:8080/orders/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg
 
 ###
 POST localhost:8080/orders
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjYzMjQxLCJpYXQiOjE2NDQ2MjcyNDF9.UT4_71p8eWLv5IgGAIlUwa3eCjvWkQCLBCvCKOK2KD4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg
 Content-Type: application/json
 
 {
   "customer_id": 2,
   "books_quantity": [
-    {"bookId" : 1, "quantity": 3}
+    {"bookId" : 4, "quantity": 2}
   ],
-  "amount": 13.34
+  "amount": 1000
 }
 
 ###
 GET localhost:8080/orders/interval?fromDate=2022-01-31&toDate=2022-03-01
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg
 
 ###
 GET localhost:8080/stats/customers
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjYzMjQxLCJpYXQiOjE2NDQ2MjcyNDF9.UT4_71p8eWLv5IgGAIlUwa3eCjvWkQCLBCvCKOK2KD4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg
 
 ###
 GET localhost:8080/stats/customers/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NjI3MjAxLCJpYXQiOjE2NDQ1OTEyMDF9.Q-iZY9F0-tIrFNDVn4yw7de-6FqMVYhxpxOJkDl1BtY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg

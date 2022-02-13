@@ -4,6 +4,8 @@ import com.readingisgood.getirhomeassignment.enities.Customer;
 import com.readingisgood.getirhomeassignment.enities.Order;
 import com.readingisgood.getirhomeassignment.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,8 +30,8 @@ public class CustomerService {
         return customer.orElseThrow(NoSuchElementException::new);
     }
 
-    public Set<Order> findOrdersForCustomerId(Long customerId) {
+    public Page<Order> findOrdersForCustomerId(Long customerId, Optional<Integer> page) {
 
-        return customerRepository.findOrders(customerId);
+        return customerRepository.findOrders(customerId, PageRequest.of(page.orElse(0), 1));
     }
 }

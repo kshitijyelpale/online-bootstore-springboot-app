@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -41,8 +42,8 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}/orders")
-    public ResponseEntity<?> findOrderByCustomerId(@PathVariable("id") Long customerId) {
-        CollectionModel<Order> resource = CollectionModel.of(customerService.findOrdersForCustomerId(customerId));
+    public ResponseEntity<?> findOrderByCustomerId(@PathVariable("id") Long customerId, @RequestParam Optional<Integer> page) {
+        CollectionModel<Order> resource = CollectionModel.of(customerService.findOrdersForCustomerId(customerId, page));
 
         return buildResponseEntity(customerId, resource, HttpStatus.OK);
     }
@@ -51,7 +52,7 @@ public class CustomerController {
         representationModel.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)
                 .findCustomerById(customerId)).withSelfRel());
         representationModel.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CustomerController.class)
-                .findOrderByCustomerId(customerId)).withRel("orders"));
+                .findOrderByCustomerId(customerId, Optional.empty())).withRel("orders"));
 
         return new ResponseEntity<>(representationModel, httpStatus);
     }
