@@ -97,5 +97,4 @@ public class OrderService {
         return orderRepository.getMonthlyStatsForCustomerId(customerId);
     }
 
-
 }

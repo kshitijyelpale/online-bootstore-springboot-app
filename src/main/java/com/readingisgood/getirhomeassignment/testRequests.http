@@ -25,7 +25,7 @@ Content-Type: application/json
 
 ###
 GET localhost:8080/customers/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0NzQwNjQwLCJpYXQiOjE2NDQ3MDQ2NDB9.WFTyNgVHNJJrWnE_PI9NLa9j4nwePdnp3l3aJ04vOSg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjQ0ODI1MDM3LCJpYXQiOjE2NDQ3ODkwMzd9.B8s1QB0V-0JrvKcIAQP30WShbDbKxmXw-kpLuQ-LFEA
 
 ###
 POST localhost:8080/customers

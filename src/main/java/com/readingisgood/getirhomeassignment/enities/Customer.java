@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "customer")
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
