@@ -15,6 +15,3 @@ all the API request with request bodies
 6. Tried to cover all the specs mentioned. 
 7. `Architectre.png` of database entities is available in this directory. 
 8. My tech stack Java, Spring boot, security, JPA, Mockito tests, H2 in memory database.
-9. Few test cases are not working. Due to time constraint did not have much time to diagnose the problems.
-
-Thanks for the invitation of the task.
