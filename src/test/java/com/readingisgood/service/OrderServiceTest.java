@@ -1,11 +1,11 @@
-package com.readingisgood.getirhomeassignment.service;
+package com.readingisgood.service;
 
-import com.readingisgood.getirhomeassignment.enities.*;
-import com.readingisgood.getirhomeassignment.exception.CustomException;
-import com.readingisgood.getirhomeassignment.repositories.CustomerRepository;
-import com.readingisgood.getirhomeassignment.services.BookService;
-import com.readingisgood.getirhomeassignment.services.CustomerService;
-import com.readingisgood.getirhomeassignment.services.OrderService;
+import com.readingisgood.enities.*;
+import com.readingisgood.exception.CustomException;
+import com.readingisgood.repositories.CustomerRepository;
+import com.readingisgood.services.BookService;
+import com.readingisgood.services.CustomerService;
+import com.readingisgood.services.OrderService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;

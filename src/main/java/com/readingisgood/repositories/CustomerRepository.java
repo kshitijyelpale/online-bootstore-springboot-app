@@ -1,7 +1,7 @@
 package com.readingisgood.repositories;
 
-import com.readingisgood.getirhomeassignment.enities.Customer;
-import com.readingisgood.getirhomeassignment.enities.Order;
+import com.readingisgood.enities.Customer;
+import com.readingisgood.enities.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

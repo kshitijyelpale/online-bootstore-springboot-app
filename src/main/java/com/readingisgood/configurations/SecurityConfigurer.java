@@ -1,6 +1,6 @@
 package com.readingisgood.configurations;
 
-import com.readingisgood.getirhomeassignment.auth.JwtRequestFilter;
+import com.readingisgood.auth.JwtRequestFilter;
 import com.readingisgood.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

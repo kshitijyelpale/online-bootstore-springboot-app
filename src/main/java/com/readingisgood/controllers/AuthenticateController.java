@@ -1,6 +1,6 @@
 package com.readingisgood.controllers;
 
-import com.readingisgood.getirhomeassignment.auth.Jwt;
+import com.readingisgood.auth.Jwt;
 import com.readingisgood.enities.AuthenticationRequest;
 import com.readingisgood.enities.AuthenticationResponse;
 import com.readingisgood.services.MyUserDetailsService;

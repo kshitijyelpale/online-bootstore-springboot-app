@@ -1,7 +1,7 @@
 package com.readingisgood.repositories;
 
-import com.readingisgood.getirhomeassignment.enities.Order;
-import com.readingisgood.getirhomeassignment.enities.Statistics;
+import com.readingisgood.enities.Order;
+import com.readingisgood.enities.Statistics;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

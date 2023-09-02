@@ -1,7 +1,7 @@
-package com.readingisgood.getirhomeassignment.repository;
+package com.readingisgood.repository;
 
-import com.readingisgood.getirhomeassignment.enities.Customer;
-import com.readingisgood.getirhomeassignment.repositories.CustomerRepository;
+import com.readingisgood.enities.Customer;
+import com.readingisgood.repositories.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

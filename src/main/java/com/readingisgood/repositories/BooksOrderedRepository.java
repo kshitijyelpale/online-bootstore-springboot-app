@@ -1,7 +1,7 @@
 package com.readingisgood.repositories;
 
-import com.readingisgood.getirhomeassignment.enities.BooksOrders;
-import com.readingisgood.getirhomeassignment.enities.BooksOrdersId;
+import com.readingisgood.enities.BooksOrders;
+import com.readingisgood.enities.BooksOrdersId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,8 +1,8 @@
-package com.readingisgood.getirhomeassignment.controller;
+package com.readingisgood.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.readingisgood.getirhomeassignment.controllers.CustomerController;
-import com.readingisgood.getirhomeassignment.enities.Customer;
+import com.readingisgood.controllers.CustomerController;
+import com.readingisgood.enities.Customer;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

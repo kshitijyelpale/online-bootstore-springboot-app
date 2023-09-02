@@ -1,8 +1,8 @@
 package com.readingisgood.services;
 
-import com.readingisgood.getirhomeassignment.enities.Customer;
-import com.readingisgood.getirhomeassignment.enities.Order;
-import com.readingisgood.getirhomeassignment.repositories.CustomerRepository;
+import com.readingisgood.enities.Customer;
+import com.readingisgood.enities.Order;
+import com.readingisgood.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

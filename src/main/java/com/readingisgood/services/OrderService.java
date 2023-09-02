@@ -1,9 +1,9 @@
 package com.readingisgood.services;
 
-import com.readingisgood.getirhomeassignment.enities.*;
-import com.readingisgood.getirhomeassignment.exception.CustomException;
-import com.readingisgood.getirhomeassignment.repositories.BooksOrderedRepository;
-import com.readingisgood.getirhomeassignment.repositories.OrderRepository;
+import com.readingisgood.enities.*;
+import com.readingisgood.exception.CustomException;
+import com.readingisgood.repositories.BooksOrderedRepository;
+import com.readingisgood.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
