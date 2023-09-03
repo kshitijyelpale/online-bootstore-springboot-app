@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @SqlResultSetMapping(
@@ -60,7 +59,7 @@ import java.util.Set;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long id = 0L;
 
@@ -68,6 +67,7 @@ public class Order {
     private Timestamp orderDate = new Timestamp(System.currentTimeMillis());
 
     @Getter
+    @Min(value = 0, message = "Amount cannot be less than 0")
     private Double amount;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -5,8 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,17 +18,20 @@ import java.util.Set;
 @NoArgsConstructor
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long id = 0L;
 
     @Getter
+    @NotNull(message = "Book name should not be null")
     private String name;
 
     @Getter
+    @NotNull(message = "Publisher should not be null")
     private String publisher;
 
     @Getter
+    @Min(value = 0, message = "Stock should be greater than or equal to 0")
     private Integer stock;
 
     @JsonIgnore
