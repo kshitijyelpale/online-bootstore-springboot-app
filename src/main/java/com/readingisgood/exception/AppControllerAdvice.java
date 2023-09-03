@@ -12,11 +12,11 @@ public class AppControllerAdvice {
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<?> handleNoSuchElementException(NoSuchElementException noSuchElementException) {
-        return new ResponseEntity<>("Resource is not available, please change your request.", HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Resource is not available, please change your request.");
     }
 
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<?> handleCustomException(CustomException customException) {
-        return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(customException.getMessage());
     }
 }
