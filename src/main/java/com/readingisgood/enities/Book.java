@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,6 +33,7 @@ public class Book {
 
     @Getter
     @Min(value = 0, message = "Stock should be greater than or equal to 0")
+//    @PositiveOrZero(message = "Stock should be greater than or equal to 0")
     private Integer stock;
 
     @JsonIgnore

@@ -15,8 +15,8 @@ public class AppControllerAdvice {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Resource is not available, please change your request.");
     }
 
-    @ExceptionHandler(CustomException.class)
-    public ResponseEntity<?> handleCustomException(CustomException customException) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(customException.getMessage());
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<?> handleCustomException(ServiceException serviceException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(serviceException.getMessage());
     }
 }

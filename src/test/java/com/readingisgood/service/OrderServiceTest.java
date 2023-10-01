@@ -1,28 +1,22 @@
 package com.readingisgood.service;
 
 import com.readingisgood.enities.*;
-import com.readingisgood.exception.CustomException;
-import com.readingisgood.repositories.CustomerRepository;
+import com.readingisgood.exception.ServiceException;
 import com.readingisgood.services.BookService;
 import com.readingisgood.services.CustomerService;
 import com.readingisgood.services.OrderService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -78,7 +72,7 @@ public class OrderServiceTest {
 
     @Test
     public void customerDoesNotExist() {
-        expectedException.expect(CustomException.class);
+        expectedException.expect(ServiceException.class);
         expectedException.expectMessage("Customer does not exist.");
 
         when(customerService.findCustomerById(anyLong())).thenReturn(null);
@@ -88,7 +82,7 @@ public class OrderServiceTest {
 
     @Test
     public void noBooksInRequest() {
-        expectedException.expect(CustomException.class);
+        expectedException.expect(ServiceException.class);
         expectedException.expectMessage("No books are in order request.");
 
         when(customerService.findCustomerById(orderRequest.getCustomer_id())).thenReturn(customer);
@@ -98,7 +92,7 @@ public class OrderServiceTest {
 
     @Test
     public void requestQuantityNoAvailable() {
-        expectedException.expect(CustomException.class);
+        expectedException.expect(ServiceException.class);
         expectedException.expectMessage(String.format("Book %s is not available in requested quantity.", book.getName()));
 
         when(customerService.findCustomerById(orderRequest.getCustomer_id())).thenReturn(customer);
@@ -109,7 +103,7 @@ public class OrderServiceTest {
 
     @Test
     public void booksOutOfStock() {
-        expectedException.expect(CustomException.class);
+        expectedException.expect(ServiceException.class);
         expectedException.expectMessage(String.format("Book %s is out of stock.", book2.getName()));
 
         when(customerService.findCustomerById(orderRequest.getCustomer_id())).thenReturn(customer);

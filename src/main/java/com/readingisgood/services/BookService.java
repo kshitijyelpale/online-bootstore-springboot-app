@@ -1,7 +1,7 @@
 package com.readingisgood.services;
 
 import com.readingisgood.enities.Book;
-import com.readingisgood.exception.CustomException;
+import com.readingisgood.exception.ServiceException;
 import com.readingisgood.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,11 @@ import java.util.Optional;
 @Service
 public class BookService {
 
-    @Autowired
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
+
+    BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     @Transactional
     public Book saveBook(Book book) {
@@ -30,7 +33,7 @@ public class BookService {
 
             return bookRepository.save(book1);
         }
-        throw new CustomException(String.format("Book id %s does not exist", bookId));
+        throw new ServiceException(String.format("Book id %s does not exist", bookId));
     }
 
     public Book findBookById(Long bookId) {

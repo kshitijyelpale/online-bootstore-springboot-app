@@ -19,3 +19,5 @@ spring:
 springdoc:
   api-docs:
     path: /book-docs
+server:
+  port: 9090

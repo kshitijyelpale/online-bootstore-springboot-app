@@ -9,8 +9,7 @@
    2. Execute `/authenticate` API and copy the token
    3. Currently, `username` and `password` are `test` each.
    4. Paste the token in the headers of the rest of the APIs
-4. For reference, refer `src/main/java/com/readingisgood/getirhomeassignment/testRequests.http` where I have mentioned
-all the API request with request bodies
+4. For reference, refer `testRequests.http` where I have mentioned all the API request with request bodies
 5. `/h2-console` is not authenticated. You can check the stored data. Credentials are in `application.yml`
 6. Tried to cover all the specs mentioned. 
 7. `Architectre.png` of database entities is available in this directory. 

@@ -16,8 +16,11 @@ import java.util.Set;
 @Service
 public class CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
+
+    CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @Transactional
     public Customer saveCustomer(Customer customer) {
