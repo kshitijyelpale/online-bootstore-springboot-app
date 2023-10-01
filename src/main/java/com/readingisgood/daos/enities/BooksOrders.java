@@ -1,4 +1,4 @@
-package com.readingisgood.enities;
+package com.readingisgood.daos.enities;
 
 import jakarta.persistence.*;
 import lombok.Data;

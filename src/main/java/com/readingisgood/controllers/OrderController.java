@@ -1,11 +1,7 @@
 package com.readingisgood.controllers;
 
-import com.readingisgood.enities.Book;
-import com.readingisgood.enities.Customer;
-import com.readingisgood.enities.Order;
-import com.readingisgood.enities.OrderRequest;
-import com.readingisgood.services.BookService;
-import com.readingisgood.services.CustomerService;
+import com.readingisgood.daos.enities.Order;
+import com.readingisgood.daos.resources.OrderRequest;
 import com.readingisgood.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.*;
 
 @RestController

@@ -1,10 +1,9 @@
 package com.readingisgood.controllers;
 
-import com.readingisgood.enities.Statistics;
+import com.readingisgood.daos.resources.Statistics;
 import com.readingisgood.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

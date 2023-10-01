@@ -1,6 +1,7 @@
-package com.readingisgood.enities;
+package com.readingisgood.daos.enities;
 
 import com.fasterxml.jackson.annotation.*;
+import com.readingisgood.daos.resources.Statistics;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;

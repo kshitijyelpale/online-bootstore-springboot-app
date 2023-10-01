@@ -1,7 +1,7 @@
 package com.readingisgood.services;
 
-import com.readingisgood.enities.Customer;
-import com.readingisgood.enities.Order;
+import com.readingisgood.daos.enities.Customer;
+import com.readingisgood.daos.enities.Order;
 import com.readingisgood.repositories.CustomerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;

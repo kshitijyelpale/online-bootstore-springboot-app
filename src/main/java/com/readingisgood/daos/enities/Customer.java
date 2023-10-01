@@ -1,4 +1,4 @@
-package com.readingisgood.enities;
+package com.readingisgood.daos.enities;
 
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;

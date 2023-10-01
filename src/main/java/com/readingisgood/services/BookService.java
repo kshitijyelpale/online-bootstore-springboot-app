@@ -1,6 +1,6 @@
 package com.readingisgood.services;
 
-import com.readingisgood.enities.Book;
+import com.readingisgood.daos.enities.Book;
 import com.readingisgood.exception.ServiceException;
 import com.readingisgood.repositories.BookRepository;
 import jakarta.transaction.Transactional;

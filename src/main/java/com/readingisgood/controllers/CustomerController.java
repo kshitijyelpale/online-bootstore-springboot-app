@@ -1,7 +1,7 @@
 package com.readingisgood.controllers;
 
-import com.readingisgood.enities.Customer;
-import com.readingisgood.enities.Order;
+import com.readingisgood.daos.enities.Customer;
+import com.readingisgood.daos.enities.Order;
 import com.readingisgood.services.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/customers")

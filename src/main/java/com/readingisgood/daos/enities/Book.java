@@ -1,4 +1,4 @@
-package com.readingisgood.enities;
+package com.readingisgood.daos.enities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity

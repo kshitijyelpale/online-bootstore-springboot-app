@@ -1,10 +1,9 @@
 package com.readingisgood.controllers;
 
 import com.readingisgood.auth.Jwt;
-import com.readingisgood.enities.AuthenticationRequest;
-import com.readingisgood.enities.AuthenticationResponse;
+import com.readingisgood.daos.resources.AuthenticationRequest;
+import com.readingisgood.daos.resources.AuthenticationResponse;
 import com.readingisgood.services.MyUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,13 +31,13 @@ public class AuthenticateController {
     public ResponseEntity<?> createAuthToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
+                    new UsernamePasswordAuthenticationToken(authenticationRequest.username(), authenticationRequest.password())
             );
         } catch (BadCredentialsException e) {
             throw new Exception("Incorrect username or password.", e);
         }
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.username());
         final String token = jwt.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(token));

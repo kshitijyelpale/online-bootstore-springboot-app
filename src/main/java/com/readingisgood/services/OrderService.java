@@ -1,6 +1,9 @@
 package com.readingisgood.services;
 
-import com.readingisgood.enities.*;
+import com.readingisgood.daos.enities.*;
+import com.readingisgood.daos.resources.BooksQuantity;
+import com.readingisgood.daos.resources.OrderRequest;
+import com.readingisgood.daos.resources.Statistics;
 import com.readingisgood.exception.ServiceException;
 import com.readingisgood.repositories.BooksOrderedRepository;
 import com.readingisgood.repositories.OrderRepository;
@@ -34,14 +37,14 @@ public class OrderService {
 
     @Transactional
     public Order saveOrder(OrderRequest orderRequest) {
-        Long customerId = orderRequest.getCustomer_id();
+        Long customerId = orderRequest.customer_id();
 
         Customer customer = customerService.findCustomerById(customerId);
         if (customer == null) {
             throw new ServiceException("Customer does not exist.");
         }
 
-        List<BooksQuantity> booksWithQuantity = orderRequest.getBooks_quantity();
+        List<BooksQuantity> booksWithQuantity = orderRequest.books_quantity();
 
         if (booksWithQuantity.isEmpty()) throw new ServiceException("No books are in order request.");
 
@@ -49,17 +52,17 @@ public class OrderService {
         Set<Book> books = new HashSet<>();
         synchronized (booksWithQuantity) {
             booksWithQuantity.forEach(booksQuantity -> {
-                Book book = bookService.findBookById(booksQuantity.getBookId());
+                Book book = bookService.findBookById(booksQuantity.bookId());
                 if (book.getStock() == 0) {
                     throw new ServiceException(String.format("Book %s is out of stock.", book.getName()));
                 }
 
-                if (book.getStock() - booksQuantity.getQuantity() < 0) {
+                if (book.getStock() - booksQuantity.quantity() < 0) {
                     throw new ServiceException(String.format("Book %s is not available in requested quantity.", book.getName()));
                 }
 
-                bookService.updateQuantityForBook(book.getId(), book.getStock() - booksQuantity.getQuantity());
-                booksQuant.put(book.getId(), booksQuantity.getQuantity());
+                bookService.updateQuantityForBook(book.getId(), book.getStock() - booksQuantity.quantity());
+                booksQuant.put(book.getId(), booksQuantity.quantity());
                 books.add(book);
             });
         }
@@ -70,7 +73,7 @@ public class OrderService {
         Order order = new Order();
 
         order.setCustomer(customer);
-        order.setAmount(orderRequest.getAmount());
+        order.setAmount(orderRequest.amount());
         order.setBooks(books);
 
         Order savedOrder = orderRepository.save(order);

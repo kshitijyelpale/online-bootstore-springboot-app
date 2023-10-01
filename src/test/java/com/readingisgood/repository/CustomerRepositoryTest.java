@@ -1,6 +1,6 @@
 package com.readingisgood.repository;
 
-import com.readingisgood.enities.Customer;
+import com.readingisgood.daos.enities.Customer;
 import com.readingisgood.repositories.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.LIST;
 
 @DataJpaTest
 public class CustomerRepositoryTest {

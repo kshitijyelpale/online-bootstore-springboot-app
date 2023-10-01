@@ -1,6 +1,6 @@
 package com.readingisgood.repository;
 
-import com.readingisgood.enities.Book;
+import com.readingisgood.daos.enities.Book;
 import com.readingisgood.repositories.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

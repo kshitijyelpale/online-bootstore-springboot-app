@@ -1,4 +1,4 @@
-package com.readingisgood.enities;
+package com.readingisgood.daos.enities;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;

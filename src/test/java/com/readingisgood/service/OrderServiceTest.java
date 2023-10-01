@@ -1,5 +1,9 @@
 package com.readingisgood.service;
 
+import com.readingisgood.daos.enities.Book;
+import com.readingisgood.daos.resources.BooksQuantity;
+import com.readingisgood.daos.enities.Customer;
+import com.readingisgood.daos.resources.OrderRequest;
 import com.readingisgood.enities.*;
 import com.readingisgood.exception.ServiceException;
 import com.readingisgood.services.BookService;

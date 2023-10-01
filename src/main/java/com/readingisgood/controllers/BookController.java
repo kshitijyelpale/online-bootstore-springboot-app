@@ -1,6 +1,6 @@
 package com.readingisgood.controllers;
 
-import com.readingisgood.enities.Book;
+import com.readingisgood.daos.enities.Book;
 import com.readingisgood.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
