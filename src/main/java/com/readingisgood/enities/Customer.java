@@ -1,14 +1,12 @@
 package com.readingisgood.enities;
 
 import com.fasterxml.jackson.annotation.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,10 +19,10 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private Long id = 0L;
+    private Long id;
 
     @Getter
-    @NotNull(message = "Customer name should not be null")
+    @NotNull(value = "Customer name should not be null")
     private String name;
 
     @Getter
@@ -38,7 +36,7 @@ public class Customer {
 
     @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Order> orders = new HashSet<>();
+    private Set<Order> orders;
 
     @JsonBackReference
     public Set<Order> getOrders() {

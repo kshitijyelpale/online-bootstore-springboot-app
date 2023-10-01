@@ -1,10 +1,10 @@
 package com.readingisgood.enities;
 
 import com.fasterxml.jackson.annotation.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;

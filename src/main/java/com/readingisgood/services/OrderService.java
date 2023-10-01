@@ -4,27 +4,33 @@ import com.readingisgood.enities.*;
 import com.readingisgood.exception.ServiceException;
 import com.readingisgood.repositories.BooksOrderedRepository;
 import com.readingisgood.repositories.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
 public class OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
-    @Autowired
-    private BooksOrderedRepository booksOrderedRepository;
+    private final BooksOrderedRepository booksOrderedRepository;
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
-    @Autowired
-    private BookService bookService;
-    private Object BooksOrders;
+    private final BookService bookService;
+
+    OrderService(
+            OrderRepository orderRepository,
+            BooksOrderedRepository booksOrderedRepository,
+            CustomerService customerService,
+            BookService bookService
+    ) {
+        this.orderRepository = orderRepository;
+        this.booksOrderedRepository = booksOrderedRepository;
+        this.customerService = customerService;
+        this.bookService = bookService;
+    }
 
     @Transactional
     public Order saveOrder(OrderRequest orderRequest) {

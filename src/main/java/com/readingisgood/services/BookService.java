@@ -3,10 +3,9 @@ package com.readingisgood.services;
 import com.readingisgood.enities.Book;
 import com.readingisgood.exception.ServiceException;
 import com.readingisgood.repositories.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 

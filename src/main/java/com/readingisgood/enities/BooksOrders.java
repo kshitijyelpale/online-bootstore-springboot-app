@@ -1,8 +1,8 @@
 package com.readingisgood.enities;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity

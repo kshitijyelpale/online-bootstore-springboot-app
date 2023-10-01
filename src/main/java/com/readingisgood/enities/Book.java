@@ -2,12 +2,12 @@ package com.readingisgood.enities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +21,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private Long id = 0L;
+    private Long id;
 
     @Getter
     @NotNull(message = "Book name should not be null")
@@ -38,7 +38,7 @@ public class Book {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "books")
-    private Set<Order> orders = new HashSet<>();
+    private Set<Order> orders;
 
     @JsonBackReference
     public Set<Order> getOrders() {

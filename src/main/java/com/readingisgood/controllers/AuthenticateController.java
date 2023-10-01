@@ -16,14 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthenticateController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private MyUserDetailsService userDetailsService;
+    private final MyUserDetailsService userDetailsService;
 
-    @Autowired
-    private Jwt jwt;
+    private final Jwt jwt;
+
+    AuthenticateController(AuthenticationManager authenticationManager, MyUserDetailsService userDetailsService, Jwt jwt) {
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+        this.jwt = jwt;
+    }
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {

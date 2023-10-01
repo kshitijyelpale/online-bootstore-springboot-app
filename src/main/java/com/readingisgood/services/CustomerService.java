@@ -3,15 +3,13 @@ package com.readingisgood.services;
 import com.readingisgood.enities.Customer;
 import com.readingisgood.enities.Order;
 import com.readingisgood.repositories.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class CustomerService {
